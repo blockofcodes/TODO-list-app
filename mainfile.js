@@ -1,4 +1,4 @@
-document.getElementById('add').addEventListener('click', add);
+document.getElementById('inputText').addEventListener('click', add);
 show();
 
 
