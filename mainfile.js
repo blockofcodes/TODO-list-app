@@ -1,10 +1,12 @@
 document.getElementById('add').addEventListener('click', add);
 show();
 
-function show() {
-    var todos = get_todos();
 
-    var tagging = '<ul>';
+//Displaying  the current TODO list
+function show() {
+    const todos = get_todos();
+
+    const tagging = '<ul>';
     for(var i=0; i<todos.length; i++) {
         tagging += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button></li>';
     };
@@ -12,27 +14,29 @@ function show() {
  
     document.getElementById('todos').innerHTML = tagging;
  
-    var buttons = document.getElementsByClassName('remove');
+    const buttons = document.getElementsByClassName('remove');
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', remove);
     };
 }
 
 
-
+//retrieving the data from the browser local storage
 function get_todos() {
-    var todos = new Array;
-    var todos_str = localStorage.getItem('todo');
+    const todos = new Array;
+    const todos_str = localStorage.getItem('todo');
     if (todos_str !== null) {
         todos = JSON.parse(todos_str); 
     }
     return todos;
 }
- 
+
+
+ // Getting the value from the inputbox and adding it to the local storage
 function add() {
-    var task = document.getElementById('inputdata').value;
+    const task = document.getElementById('inputdata').value;
  
-    var todos = get_todos();
+    const todos = get_todos();
     todos.push(task);
     localStorage.setItem('todo', JSON.stringify(todos));
  
@@ -41,15 +45,15 @@ function add() {
     return false;
 }
  
+//removing the selected TODO list 
 function remove() {
     var id = this.getAttribute('id');
     var todos = get_todos();
     todos.splice(id, 1);
     localStorage.setItem('todo', JSON.stringify(todos));
- 
+
     show();
-    
- 
+
     return false;
 }
  
